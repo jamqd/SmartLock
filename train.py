@@ -3,14 +3,13 @@ from upload import upload
 import os
 from take_photo_function import takePhoto
 
-img_filename = "bob.jpeg"
-img_filepath = "testpics/bob.jpeg"
+
 
 img_filename = takePhoto()
 
 
 #get absolute path of photo
-img_abspath = os.path.abspath("images/" + img_filepath)
+img_abspath = os.path.abspath("images/" + img_filename)
 
 # url of image of face to add to verified list
 img_url = str(upload(img_filename, img_abspath))

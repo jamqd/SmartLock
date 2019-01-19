@@ -23,6 +23,4 @@ def takePhoto():
         camera.capture('/home/pi/Desktop/SmartLock/images/'+name)
     return name
 
-#runs the code
-print(takePhoto())
         

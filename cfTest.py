@@ -17,14 +17,14 @@ CF.BaseUrl.set(BASE_URL)
 img_url = 'https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg'
 result = CF.face.detect(img_url)
 print (result)
-"""
+
 
 face_id = result[0].get('faceId')
 print (face_id)
-
+"""
 CF.person_group.delete('hi')
 
-test = CF.person_group.create('hi')
+test = CF.person_group.create('hi', "mygroup")
 print("smt here " + str(test))
 
 print(CF.person_group.get('hi'))
@@ -35,7 +35,9 @@ print(person_id)
 
 #print(CF.person.get('hi', person_id))
 
-CF.person.add_face("Users\icd10\Documents\SmartLock\detection1.jpg", 'hi', person_id)
+#CF.large_person_group_person.add_face("https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg", 'hi', person_id)
+
+CF.person.add_face("hi", person_id, "https://ideahacksstorage.blob.core.windows.net/pics/bob.jpeg")
 
 CF.person_group.delete('hi')
 """

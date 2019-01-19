@@ -13,16 +13,16 @@ import numpy as np
     
 def takePhoto():
     currentDT = datetime.datetime.now()
-    name = str(currentDT)
+    name = str(int(time.time()))+".jpg"
 
     with picamera.PiCamera() as camera:
         camera.resolution = (1024, 768)
         camera.start_preview()
         # Camera warm-up time
-        time.sleep(2)
-        camera.capture(name + '.jpg')
-
+        time.sleep(3)
+        camera.capture('/home/pi/Desktop/SmartLock/images/'+name)
+    return name
 
 #runs the code
-takePhoto();
+print(takePhoto())
         

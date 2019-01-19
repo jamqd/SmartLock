@@ -1,4 +1,4 @@
-
+"""
 #!/usr/bin/python
 
 import smbus
@@ -69,3 +69,17 @@ while True:
     print "y rotation: " , get_y_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
 
     time.sleep(0.5)
+"""
+
+import smbus
+
+bus = smbus.SMBus(1)
+
+DEVICE_ADDRESS = 0x1e
+
+data = []
+data.append(bus.read_byte_data(DEVICE_ADDRESS, 0x03))
+for i in range(1, 6):
+    data.append(bus.read_byte_data(DEVICE_ADDRESS, 0x03 + i))
+
+print(data)

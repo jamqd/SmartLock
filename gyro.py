@@ -14,11 +14,11 @@ power_mgmt_1 = 0x6b
 power_mgmt_2 = 0x6c
  
 def read_byte(reg):
-    return bus.read_byte_data(address, reg)
+    return bus.read_byte_data(0x6b, reg)
  
 def read_word(reg):
-    h = bus.read_byte_data(address, reg)
-    l = bus.read_byte_data(address, reg+1)
+    h = bus.read_byte_data(0x6b, reg)
+    l = bus.read_byte_data(0x6b, reg+1)
     value = (h << 8) + l
     return value
  
@@ -44,7 +44,9 @@ bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
 address = 0x68       # via i2cdetect
  
 # Aktivieren, um das Modul ansprechen zu koennen
-bus.write_byte_data(address, power_mgmt_1, 0)
+bus.write_byte_data(0X6b, power_mgmt_1, 0)
+
+while True:
  
 print "Gyroskop"
 print "--------"
@@ -75,3 +77,5 @@ print "beschleunigung_zout: ", ("%6d" % beschleunigung_zout), " skaliert: ", bes
  
 print "X Rotation: " , get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert)
 print "Y Rotation: " , get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert)
+
+sleep(1)

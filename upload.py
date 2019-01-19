@@ -30,4 +30,4 @@ def upload(fileName):
     print(upload_url)
     return upload_url
 
-upload("bob.jpeg")
+#upload("bob.jpeg")

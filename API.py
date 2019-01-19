@@ -1,6 +1,13 @@
 import requests
 
 class API:
+    """
+    Class for API requests for one person group
+
+    self.pg_name: the personGroupId
+    self.base_url: the base url for the Azure face API
+
+    """
     
     def __init__(self, api_key, person_group_name):
         self.headers = { 'Ocp-Apim-Subscription-Key': api_key }
@@ -19,6 +26,11 @@ class API:
             print(response.json())
 
     def create_person(self, name):
+        """
+        Creates a person with name as name belonging to the person group self.pg_name
+
+        name: the name of the person added
+        """
         url = self.base_url + "persongroups/" + self.pg_name + "/persons"
         response = requests.post(url, headers=self.headers, json={"name": name})
         r_json = response.json()
@@ -42,11 +54,37 @@ class API:
         else:
             print(response.json())
 
+    def train(self):
+        url = self.base_url + "persongroups/" + self.pg_name + "/train"
+        response = requests.post(url, headers=self.headers)
+        if response.status_code == 202 :
+            print("Started training  " + self.pg_name +  " person group")
+        else:
+            print(response.json())
 
-a = API("64994017348a42009d7484e0fd2f2cf0", "didy")
-a.create_person_group()
-id = a.create_person("josh")
-a.add_face(id, "https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg")
-a.delete()
+    def get_training_status(self):
+        url = self.base_url + "persongroups/" + self.pg_name + "/training"
+        response = requests.get(url, headers=self.headers)
+        print(response.json())
+        return response.json()
+
+    def identify(self, query_face_url):
+        faceId = self.detect(query_face_url)
+        url = self.base_url + "identify"
+        json = {
+            "faceIds": [faceId],
+            "personGroupId": self.pg_name
+        }
+        response = requests.post(url, headers=self.headers, json=json)
+        print(response.json())
+        return response.json()
+
+    def detect(self, query_face_url):
+        url = self.base_url + "detect"
+        response = requests.post(url, headers = self.headers, params={"returnFaceId":"true"}, json={"url": query_face_url} )
+        print(response.json())
+        face_id = response.json()[0]['faceId']
+        return face_id
+
 
     

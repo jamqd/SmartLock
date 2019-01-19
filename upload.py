@@ -1,7 +1,6 @@
 from azure.storage.blob import BlockBlobService, PublicAccess
 
-
-def upload(fileName):
+def upload(fileName, absFilePath):
     """
     Uploads file with fileName as blob to Azure container
 
@@ -19,7 +18,7 @@ def upload(fileName):
     absolute_path = "/Users/johndang/git/SmartLock/"
 
     #upload blob to azure container
-    block_blob_service.create_blob_from_path("pics", fileName, absolute_path + "testpics/" + fileName)
+    block_blob_service.create_blob_from_path("pics", fileName, absFilePath)
 
     print("\nList blobs in the container")
     generator = block_blob_service.list_blobs("pics")
@@ -29,5 +28,3 @@ def upload(fileName):
     upload_url = block_blob_service.make_blob_url('pics', fileName)
     print(upload_url)
     return upload_url
-
-#upload("bob.jpeg")

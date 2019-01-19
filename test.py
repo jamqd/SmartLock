@@ -1,18 +1,18 @@
 
 import RPi.GPIO as GPIO
 import time
-LedPin = 7
+LockPin = 7
 def setup():
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(LedPin, GPIO.OUT)
-    GPIO.output(LedPin, GPIO.HIGH)
+    GPIO.setup(LockPin, GPIO.OUT)
+    GPIO.output(LockPin, GPIO.HIGH)
 def blink():
-    GPIO.output(LedPin, GPIO.HIGH)
+    GPIO.output(LockPin, GPIO.HIGH)
     time.sleep(1)
-    GPIO.output(LedPin, GPIO.LOW)
+    GPIO.output(LockPin, GPIO.LOW)
     time.sleep(1)
 def destroy():
-    GPIO.output(LedPin, GPIO.LOW)
+    GPIO.output(LockPin, GPIO.LOW)
     GPIO.cleanup()
     
 if __name__ == '__main__':

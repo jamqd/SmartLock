@@ -33,7 +33,7 @@ while(True):
             query_url = upload(query_filename, query_abspath)
             response = a.identify(query_url) 
             print(response)
-            if(response > 0.9):
+            if(response[0]['candidates'][0]['confidence'] > 0.9):
                 #unlock
                 lock_unlock.unlock()
      #IF UNLOCKED, PRESS BUTTON TO LOCK     

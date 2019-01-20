@@ -23,7 +23,7 @@ class lock_unlock:
         GPIO.cleanup()
         print("destroying")
         
-        
+#        
 #if __name__ == '__main__':
 #    try:
 #        a = lock_unlock(7)

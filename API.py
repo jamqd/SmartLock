@@ -34,7 +34,6 @@ class API:
         url = self.base_url + "persongroups/" + self.pg_name + "/persons"
         response = requests.post(url, headers=self.headers, json={"name": name})
         r_json = response.json()
-        print(r_json)
         person_id = r_json['personId']
         return person_id
     
@@ -43,6 +42,8 @@ class API:
         response = requests.post(url, headers=self.headers, json={"url": img_url})
         r_json = response.json()
         print(r_json)
+        if 'error' in r_json.keys():
+            return -1
         face_id = r_json['persistedFaceId']
         return face_id
 
@@ -70,6 +71,8 @@ class API:
 
     def identify(self, query_face_url):
         faceId = self.detect(query_face_url)
+        if faceId == -1:
+            return -1
         url = self.base_url + "identify"
         json = {
             "faceIds": [faceId],
@@ -82,9 +85,11 @@ class API:
     def detect(self, query_face_url):
         url = self.base_url + "detect"
         response = requests.post(url, headers = self.headers, params={"returnFaceId":"true"}, json={"url": query_face_url} )
-        print(response.json())
-        face_id = response.json()[0]['faceId']
-        return face_id
+        print("here" + str(response.json()))
+        if len(response.json()) != 0:
+            return response.json()[0]['faceId']
+        else:
+            return -1
 
 
     

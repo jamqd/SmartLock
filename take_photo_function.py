@@ -8,7 +8,6 @@ This is a temporary script file.
 import time
 import datetime
 import picamera 
-import numpy as np
 
     
 def takePhoto():
@@ -22,5 +21,6 @@ def takePhoto():
         time.sleep(3)
         camera.capture('/home/pi/Desktop/SmartLock/images/'+name)
     return name
+
 
         

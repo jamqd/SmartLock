@@ -16,15 +16,17 @@ def button_pressed():
     GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     count = 0
+    m_count = 0
     while True:
         if(count%10==0):
             md.sample()
             dist = md.calcDist()
             if dist > 10:
                 print(dist)
+                m_count += 1
         input_state1 = GPIO.input(37)
         input_state2 = GPIO.input(16)
-        if (input_state1 == False or input_state2 == False or dist > 100):
+        if (input_state1 == False or input_state2 == False or dist>150):
             if(input_state1 == False):
                 print('Button 1 Pressed')
                 time.sleep(0.2)
@@ -33,7 +35,7 @@ def button_pressed():
                 print('Button 2 Pressed')
                 time.sleep(0.2)
                 return 2
-            if (dist > 500):
+            if (dist > 150):
                 return 0
         count += 1
 def test_button2_was_pressed():

@@ -72,7 +72,7 @@ try:
                         blinker.blink('red',5,0.5)
             if (which_button_pressed == 0):
                 blinker.blink('purple', 10, 0.25)
-                send_sms("Your lock was moved at " + str(int(time.time()))
+                send_sms("Your lock was moved at " + str(int(time.time())))
          #IF UNLOCKED, PRESS BUTTON TO LOCK
         
         if(b.is_locked == False):

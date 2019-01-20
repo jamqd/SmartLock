@@ -85,6 +85,9 @@ try:
             if(which_button_pressed==1 or which_button_pressed==2):
                 if(which_button_pressed==1):
                     b.lock()
+                    blinker.lightRed()
+                    time.sleep(3)
+                    blinker.blink('red',2,0.35)
                 if(which_button_pressed==2):
                     id = createPerson(str(int(time.time())),a)
                     face_count = 0

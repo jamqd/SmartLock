@@ -31,12 +31,15 @@ try:
     id = createPerson("josh",a)
     face_count = 0
     button_press = s.button_pressed()
+    blinker = light_up_leds()
     if button_press == 1 or button_press == 2:
         while face_count < 3:
             added_face = addFace(id, a)
             print(added_face)
             if added_face != -1:
                 face_count += 1
+            else:
+                blinker.blink('lightBlue', 2, 0.5)
     a.train()
     while(a.get_training_status()['status'] != 'succeeded'):
         print(a.get_training_status()['status'])
@@ -57,6 +60,7 @@ try:
             blinker.lightRed()
             which_button_pressed = s.button_pressed()
             if(which_button_pressed==1):
+                time.sleep(3)
                 query_filename = takePhoto()
                 blinker.lightYellow()
                 query_abspath = os.path.abspath("images/" + query_filename)
@@ -72,7 +76,7 @@ try:
                         blinker.blink('red',5,0.5)
             if (which_button_pressed == 0):
                 blinker.blink('purple', 10, 0.25)
-                send_sms("Your lock was moved at " + str(int(time.time())))
+                send_sms("Your lock was moved at " + str(int(time.time()))+" Be careful!!! ")
          #IF UNLOCKED, PRESS BUTTON TO LOCK
         
         if(b.is_locked == False):
@@ -84,11 +88,14 @@ try:
                 if(which_button_pressed==2):
                     id = createPerson(str(int(time.time())),a)
                     face_count = 0
+                    time.sleep(2)
                     while face_count < 3:
                         added_face = addFace(id, a)
                         print(added_face)
                         if added_face != -1:
                             face_count += 1
+                        else:
+                            blinker.blink('lightBlue', 2, 0.5)
                     a.train()
                     while(a.get_training_status()['status'] != 'succeeded'):
                         print(a.get_training_status()['status'])

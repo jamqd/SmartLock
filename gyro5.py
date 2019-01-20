@@ -5,7 +5,7 @@
 # Group G - EME - University of Strathclyde
 
 # import required libraries
-from smbus import SMBus
+from smbus:armhf import SMBus
 
 # Defining any required functions
 def twos_comp_combine(msb, lsb):
@@ -46,9 +46,9 @@ TEMP_Out = 0x26
 
 # Writing required settings to Gyro
 if bus.read_byte_data(L3G, 0x0f) == L3G_WHOAMI:
-    print 'L3GD20H successfully detected'
+    print ('L3GD20H successfully detected')
 else:
-    print 'L3GD20H not detected'
+    print ('L3GD20H not detected')
 
 bus.write_byte_data(L3G, CTRL_GYRO_1, 0b00001111) #enable x,y,z; choose frequency and bandwidth
 bus.write_byte_data(L3G, CTRL_GYRO_2, 0x00) # sets high pass filter

@@ -96,6 +96,8 @@ class light_up_leds:
                     self.lightGreen()
                 elif color == 'blue':
                     self.lightBlue()
+                elif color =='purple':
+                    self.lightPurple()
                 time.sleep(interval/2)
                 self.off()
                 time.sleep(interval/2)

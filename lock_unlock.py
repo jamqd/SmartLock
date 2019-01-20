@@ -1,28 +1,35 @@
 import RPi.GPIO as GPIO
 import time
-LedPin = 7
-locked = False;
+
 #setup
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(LedPin, GPIO.OUT)
-GPIO.output(LedPin, GPIO.HIGH) #LOCKS IT
-lock = True
-def lock():
-    lock = True
-    GPIO.output(LedPin, GPIO.LOW)
-def unlock():
-    lock = False
-    GPIO.output(LedPin, GPIO.HIGH)
-    time.sleep(1)
-    print("unlock")    
-def destroy():
-    GPIO.output(LedPin, GPIO.LOW)
-    GPIO.cleanup()
+class lock_unlock:
+    def __init__(self, LedPin):
+        self.LedPin = LedPin
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.LedPin, GPIO.OUT)
+        #GPIO.output(self.LedPin, GPIO.HIGH) #LOCKS IT
+        self.is_locked = True
+    def lock(self):
+        self.is_locked = True
+        GPIO.output(self.LedPin, GPIO.LOW)
+        time.sleep(1)
+    def unlock(self):
+        self.is_locked = False
+        GPIO.output(self.LedPin, GPIO.HIGH)
+        time.sleep(1)
+        print("unlock")    
+    def destroy(self):
+        GPIO.output(self.LedPin, GPIO.LOW)
+        GPIO.cleanup()
+        print("destroying")
+        
+        
 #if __name__ == '__main__':
 #    try:
-#        setup()
-#        unlock()
-#        lock()
+#        a = lock_unlock(7)
+#        a.setup()
+#        a.unlock()
+#        a.lock()
 #    except KeyboardInterrupt:
 #        print ("\n")
 #    except:

@@ -24,7 +24,7 @@ def addFace(id, api_object):
 def createPerson(name, api_object):
     id = api_object.create_person(name)
     return id
-a = API("64994017348a42009d7484e0fd2f2cf0", "varsity")
+a = API("", "varsity")
 
 try:
     a.create_person_group()

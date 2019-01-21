@@ -12,7 +12,7 @@ def upload(fileName, absFilePath):
     """
 
     # set credentials for uploading blobs to Azure
-    block_blob_service = BlockBlobService(account_name="ideahacksstorage", account_key="LHpyE+1NtOE9vSXqpFz6V1oWqYdEUCqsTkgngIEIoDbvR+Myf8XuWvy7dJQTEb5uKeSBEzG+aIfEw/R6zdP7ag==")
+    block_blob_service = BlockBlobService(account_name="", account_key="")
     
     # the path to the directory containing this file
     absolute_path = "/Users/johndang/git/SmartLock/"
